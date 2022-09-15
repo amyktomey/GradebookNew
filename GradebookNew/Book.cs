@@ -1,5 +1,7 @@
-﻿namespace Gradebook2
-{ 
+﻿using GradebookNew;
+
+namespace GradebookNew
+{
     public class Book
     {
         public Book(string name)
@@ -8,19 +10,19 @@
             this.name = name;
         }
 
-    public void AddGrade(double grade)
-    {
-        if (grade <= 100 && grade >= 0)
+        public void AddGrade(double grade)
         {
-            grades.Add(grade);
+            if (grade <= 100 && grade >= 0)
+            {
+                grades.Add(grade);
+            }
+            else
+            {
+                Console.WriteLine("Invalid value");
+            }
         }
-        else
-        {
-            Console.WriteLine("Invalid value");
-        }
-    }
 
-    public Statistics GetStatistics()
+        public Statistics GetStatistics()
         {
             var result = new Statistics
             {
@@ -29,7 +31,7 @@
                 Low = double.MaxValue
             };
 
-            for ( var index = 0; index < grades.Count; )
+            for (var index = 0; index < grades.Count;)
             {
                 result.Low = Math.Min(grades[index], result.Low);
                 result.High = Math.Max(grades[index], result.High);

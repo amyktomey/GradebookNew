@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gradebook2
+namespace GradebookNew
 {
     public class Statistics
     {

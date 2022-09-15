@@ -1,8 +1,6 @@
-﻿using Gradebook2;
-using System;
-using Xunit;
+﻿using GradebookNew;
 
-namespace GradeBook2.Tests
+namespace GradebookNewTest
 {
     public class TypeTest
     {
@@ -98,7 +96,7 @@ namespace GradeBook2.Tests
             var book2 = book1;
 
             Assert.Same(book1, book2);
-            Assert.True(Object.ReferenceEquals(book1, book2));
+            Assert.True(ReferenceEquals(book1, book2));
 
         }
 

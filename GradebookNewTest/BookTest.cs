@@ -1,13 +1,7 @@
-﻿using Gradebook2;
-using Xunit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GradebookNew;
 
 
-namespace GradeBook2.tests
+namespace GradebookNewTest
 {
     public class BookTest
     {
@@ -33,6 +27,6 @@ namespace GradeBook2.tests
 
     [AttributeUsage(AttributeTargets.All)]
     internal class FactAttribute : Attribute
-   {
+    {
     }
 }

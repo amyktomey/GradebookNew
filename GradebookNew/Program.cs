@@ -1,6 +1,6 @@
-﻿using Gradebook2;
+﻿using GradebookNew;
 
-namespace GradeBook2
+namespace GradebookNew
 {
     class Program
     {
