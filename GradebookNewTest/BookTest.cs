@@ -24,9 +24,4 @@ namespace GradebookNewTest
             Assert.Equal('B', result.Letter);
         }
     }
-
-    [AttributeUsage(AttributeTargets.All)]
-    internal class FactAttribute : Attribute
-    {
-    }
 }

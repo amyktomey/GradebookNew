@@ -1,23 +1,54 @@
 ﻿using GradebookNew;
+using System;
+using Xunit;
 
 namespace GradebookNewTest
 {
+
+    public delegate string WriteLogDelegate(string logMessage);
     public class TypeTest
-    {
-        public static void Test1()
+    { 
+        int count = 0;
+
+        [Fact]
+        public void WriteLogDelegateCanPointToMethod()
+        {
+            WriteLogDelegate log = ReturnMessage;
+            log += ReturnMessage;
+            log += IncrementCount;
+
+            var result = log("Hello!");
+            Assert.Equal(3, count);
+        }
+
+
+        string IncrementCount(string message)
+        {
+            count++;
+            return message.ToLower();
+        }
+
+        string ReturnMessage(string message)
+        {
+            count++;
+            return message;
+        }
+
+        [Fact]
+        public void ValueTypesAlsoPassByValue()
         {
             var x = GetInt();
             SetInt(ref x);
 
-            Assert.Equal(3, x);
+            Assert.Equal(42, x);
         }
 
-        private static void SetInt(ref int x)
+        private void SetInt(ref Int32 z)
         {
-            x = 42;
+            z = 42;
         }
 
-        private static int GetInt()
+        private int GetInt()
         {
             return 3;
         }
@@ -26,12 +57,12 @@ namespace GradebookNewTest
         public static void CSharpIsPassByRef()
         {
             var book1 = GetBook("Book 1");
-            GetBookSetName(ref book1, "New Name");
+            GetBookSetName(out book1, "New Name");
 
             Assert.Equal("New Name", book1.Name);
         }
 
-        private static void GetBookSetName(ref Book book, string name)
+        private static void GetBookSetName(out Book book, string name)
         {
             book = new Book(name);
         }
@@ -45,10 +76,10 @@ namespace GradebookNewTest
             Assert.Equal("Book 1", book1.Name);
         }
 
-        private static void GetBookSetName(Book book, string name)
-        {
-            book = new Book(name);
-        }
+       private static void GetBookSetName(Book book, string name)
+       {
+           book = new Book(name);
+       }
 
         [Fact]
         public static void CanSetNameFromReference()

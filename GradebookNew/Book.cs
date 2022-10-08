@@ -1,13 +1,39 @@
 ﻿using GradebookNew;
+using System.Runtime.CompilerServices;
 
 namespace GradebookNew
 {
+    public delegate void GradeAddedDelegate(object sneder, EventArgs args);
+
+
     public class Book
     {
         public Book(string name)
         {
             grades = new List<double>();
-            this.name = name;
+            Name = name;
+        }
+        public void AddGrade(char letter)
+        {
+            switch (letter)
+            {
+                case 'A':
+                    AddGrade(90);
+                    break;
+
+                case 'B':
+                    AddGrade(80);
+                    break;
+                case 'C':
+                    AddGrade(70);
+                    break;
+                case 'D':
+                    AddGrade(60);
+                    break;
+                default:
+                    AddGrade(0);
+                    break;
+            }
         }
 
         public void AddGrade(double grade)
@@ -15,12 +41,19 @@ namespace GradebookNew
             if (grade <= 100 && grade >= 0)
             {
                 grades.Add(grade);
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
+
             }
             else
             {
-                Console.WriteLine("Invalid value");
+                throw new ArgumentException($"Invalid(nameof(grade))");
             }
         }
+
+        public event GradeAddedDelegate GradeAdded;
 
         public Statistics GetStatistics()
         {
@@ -52,9 +85,13 @@ namespace GradebookNew
         }
 
         private List<double> grades;
-        public string name;
 
-        public IEnumerable<char> Name { get; set; }
+        public string Name
+        {
+            get;   
+            set;
+         }
+        // public const string CATEGORY = "Science";
     }
 }
 
